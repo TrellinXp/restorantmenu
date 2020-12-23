@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <h1 v-bind:style="headline">Restorant Menu</h1>
-
-    Today on the {{today}} the following dishes are served:
-
+    <h1 class="title">Restorant Menu</h1>
     <DishesComponent />
   </div>
 </template>
 
+<style>
+  @import '../assets/styles/Dishes.css';
+</style>
+
 <script>
 
 import DishesComponent from './DishesComponent.vue'
-import DishService from './services/DishService.js'
 
 export default {
   components: {
@@ -24,10 +24,9 @@ export default {
     }
   },
 
-  name: "Restorant Menu",
+  name: "restorantmenu",
   mounted() {
-    const dishService = new DishService();
-    dishService.sendRequest();
+
   }
 }
 

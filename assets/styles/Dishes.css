@@ -1,0 +1,37 @@
+.button {
+    margin-top: 3rem;
+    margin-right: 2rem;
+}
+
+.title {
+    color: cornflowerblue;
+}
+
+body {
+    background-color: rgb(253, 253, 253);
+}
+
+input {
+    margin-top:1rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+}
+
+.attributesClass {
+    display: flex;
+    flex-direction: row;
+}
+
+.attribute {
+    width: 20%;
+}
+
+.addDish {
+   margin-top: 0.3erm;
+}
+
+.selectBox {
+    margin-top: 1rem;
+    height:1.2rem;
+    width: 80%;
+}

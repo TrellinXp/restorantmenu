@@ -33,7 +33,6 @@ export default class Dish {
       return this.price;
     } 
 
-
     getCategory() {
         return this.category;
     }       
