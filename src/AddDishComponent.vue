@@ -16,7 +16,7 @@
       <div class="attribute"><input type="number" v-model="price" /></div>
       <div class="attribute">
         <select class="selectBox" v-model="category">
-          <option selected>main course</option>
+          <option selected="true">main course</option>
           <option>starter</option>
           <option>dessert</option>
           <option>beverage</option>
@@ -25,7 +25,7 @@
 
       <div class="attribute">
        <select class="selectBox" v-model="availability">
-          <option selected>lunch</option>
+          <option selected="true">lunch</option>
           <option>breakfast</option>
           <option>dinner</option>
           <option>monday</option>
@@ -35,7 +35,7 @@
       <div class="attribute"><input type="checkbox" id="active" name="active" checked v-model="activated"></div>
       <div class="attribute"><input type="text" v-model="servingTime" /></div>
     </div>
-    <button class="addDish" @click="addNewDish()" >Add new Dish</button>
+    <button class="addDish" v-on:click="addNewDish()">Add new Dish</button>
   </div>
 </template>
 
@@ -61,24 +61,30 @@ export default {
       servingTime: ""
     };
   },
+  
   mounted() {
     axios.get("http://localhost:9000/dishes").then((response) => {
-      this.dishes = response.data.results;
+        this.dishes = response.data.data;
     });
-    console.log(this.dishes);
+    console.log("Dishes" + this.dishes);
   },
-
-  
 
   methods: {
     addNewDish() {
       var dish = new Dish(this.dishname, this.description, this.price, this.category, this.availability, this.activated, this.servingTime);
-      console.log("Add New Dish Clicked"+ dish.toString());
-      
+      var addedDish = "";
       axios.put("http://localhost:9000/dishes", dish).then((response) => {
-        this.dishes = response.data.results;
+        addedDish = response.data.data.results;        
       });
+      console.log("Added Dish"+addedDish.dishname);
     },
+
+    reload: function(){
+      this.isRouterAlive = false
+      setTimeout(()=>{
+         this.isRouterAlive = true
+      },0)
+   }
   },
 };
 </script>

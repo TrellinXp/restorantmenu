@@ -42,10 +42,10 @@ export default {
   },
 
   mounted() {
-    axios.get("http://localhost:9000/dishes")
-    .then(response =>
-
-    {console.log(response.data.data)});
+    axios.get("http://localhost:9000/dishes").then((response) => {
+      this.dishes = response.data.results;
+    });
+    console.log(this.dishes.length);
   },
 
 }
