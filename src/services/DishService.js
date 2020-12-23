@@ -1,4 +1,4 @@
-import Dish from './services/DishService';
+const apiUrl = "localhost:9000";
 
 export default class DishService {
 
@@ -9,7 +9,7 @@ export default class DishService {
                  alert(this.responseText);
              }
         };
-        xhttp.open("GET", "Your Rest URL Here", true);
+        xhttp.open("GET", apiUrl, true);
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send("Your JSON Data Here");
     }
