@@ -37,7 +37,7 @@ export default {
         axios.get("http://localhost:9000/dishes"+"/clear")
         .then(response => 
         
-        {console.log("Dishes Cleared" + response.data)});
+        {console.log("Dishes Cleared " + response.data)});
     }
   },
 

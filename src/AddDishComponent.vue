@@ -64,7 +64,7 @@ export default {
   
   mounted() {
     axios.get("http://localhost:9000/dishes").then((response) => {
-        this.dishes = response.data.data;
+        console.log(response.data.data);
     });
     console.log("Dishes" + this.dishes);
   },
@@ -72,19 +72,11 @@ export default {
   methods: {
     addNewDish() {
       var dish = new Dish(this.dishname, this.description, this.price, this.category, this.availability, this.activated, this.servingTime);
-      var addedDish = "";
       axios.put("http://localhost:9000/dishes", dish).then((response) => {
-        addedDish = response.data.data.results;        
+        console.log("Added Dish "+response.data.data);
       });
-      console.log("Added Dish"+addedDish.dishname);
-    },
-
-    reload: function(){
-      this.isRouterAlive = false
-      setTimeout(()=>{
-         this.isRouterAlive = true
-      },0)
-   }
+      location.reload();
+    }
   },
 };
 </script>
