@@ -35,3 +35,7 @@ input {
     height:1.4rem;
     width: 80%;
 }
+
+.dishes-table {
+    margin-top: 2rem;
+}

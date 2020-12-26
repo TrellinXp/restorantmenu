@@ -2,8 +2,11 @@
 
     <div class="dishes">
 
-        The following dishes are served:
-          <AddDishComponent />
+        <b>The following dishes are served:</b>
+        <div class="dishes-table">
+          <b-table striped hover :items="dishes" :fields="fields"></b-table>
+        </div>
+        <AddDishComponent />
 
           <div id="action">
             <button class="button" @click="clearDishes()">Clear All Dishes</button>
@@ -22,18 +25,20 @@ import AddDishComponent from './AddDishComponent.vue'
 
 export default {
   components: {
-    AddDishComponent
+    AddDishComponent,
   },
   name: "restorantmenu",
   apiUrl: "http://localhost:9000/dishes/",
   data() {
     return {
+        fields: ["name", "description", "price", "category", "availability", "waitingTime"],
         dishes: [],
         today: "23.12.2020"
     }
   },
   methods: {
     clearDishes() {
+        this.dishes = [];
         axios.get("http://localhost:9000/dishes"+"/clear")
         .then(response => 
         
@@ -42,10 +47,12 @@ export default {
   },
 
   mounted() {
+    let self = this;
     axios.get("http://localhost:9000/dishes").then((response) => {
-      this.dishes = response.data.results;
+      self.dishes = response.data.data;
     });
-    console.log(this.dishes.length);
+    console.log("Dishes "+this.dishes);
+    console.log("Items"+this.items);
   },
 
 }
