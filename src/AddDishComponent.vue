@@ -62,10 +62,7 @@ export default {
   },
   
   mounted() {
-    axios.get("http://localhost:9000/dishes").then((response) => {
-        console.log(response.data.data);
-    });
-    console.log("Categorys" + this.categorys)
+    axios.get("http://localhost:9000/dishes");
   },
 
   methods: {
@@ -75,7 +72,6 @@ export default {
         console.log("Added Dish "+response.data.data);
       });
       location.reload();
-
     }
   },
 };

@@ -50,8 +50,6 @@ export default {
     axios.get("http://localhost:9000/dishes").then((response) => {
       self.dishes = response.data.data;
     });
-    console.log("Dishes "+this.dishes);
-    console.log("Items"+this.items);
   },
 
 }
