@@ -16,20 +16,17 @@
       <div class="attribute"><input type="number" v-model="price" /></div>
       <div class="attribute">
         <select class="selectBox" v-model="category">
-          <option selected="true">main course</option>
-          <option>starter</option>
-          <option>dessert</option>
-          <option>beverage</option>
+            <option v-for="category in categorys" v-bind:key="category.value">
+              {{ category }}
+            </option>
         </select>
       </div>
 
       <div class="attribute">
        <select class="selectBox" v-model="availability">
-          <option selected="true">lunch</option>
-          <option>breakfast</option>
-          <option>dinner</option>
-          <option>monday</option>
-          <option>weekends</option>
+            <option v-for="availability in availabilities" v-bind:key="availability.value">
+              {{ availability }}
+            </option>
         </select>
       </div>
       <div class="attribute"><input type="checkbox" id="active" name="active" checked v-model="activated"></div>
@@ -42,6 +39,7 @@
 <script>
 import axios from "axios";
 import { Category } from "./data/category.js";
+import { Availability } from "./data/availability.js";
 import Dish from './data/Dish.js'
 
 export default {
@@ -51,14 +49,15 @@ export default {
     return {
       dishes: [],
       today: "23.12.2020",
-      categorys: Object.keys(Category),
+      categorys: Object.values(Category),
+      availabilities: Object.values(Availability),
       dishname: "",
       description: "",
       price: "",
-      category: "",
-      availability: "",
+      category: Category.STARTER,
+      availability: Availability.breakfast,
       activated: true,
-      servingTime: ""
+      servingTime: "",
     };
   },
   
@@ -66,7 +65,7 @@ export default {
     axios.get("http://localhost:9000/dishes").then((response) => {
         console.log(response.data.data);
     });
-    console.log("Dishes" + this.dishes);
+    console.log("Categorys" + this.categorys)
   },
 
   methods: {
@@ -76,6 +75,7 @@ export default {
         console.log("Added Dish "+response.data.data);
       });
       location.reload();
+
     }
   },
 };

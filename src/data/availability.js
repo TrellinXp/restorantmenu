@@ -1,9 +1,9 @@
 const Availability = {
-    breakfast: "breakfast",
-    dinner: "dinner",
-    lunch: "lunch",
-    monday: "monday",
-    weekends: "weekends"
+    breakfast: "Breakfast",
+    dinner: "Dinner",
+    lunch: "Lunch",
+    monday: "Monday",
+    weekends: "Weekends"
 }
 
 module.exports = { Availability }

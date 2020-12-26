@@ -3,9 +3,7 @@
     <div class="dishes">
 
         <b>The following dishes are served:</b>
-        <div class="dishes-table">
-          <b-table striped hover :items="dishes" :fields="fields"></b-table>
-        </div>
+        <b-table striped hover :items="dishes" :fields="fields" class="table dishes-table table-striped"></b-table>
         <AddDishComponent />
 
           <div id="action">
@@ -33,8 +31,9 @@ export default {
     return {
         fields: ["name", "description", "price", "category", "availability", "waitingTime"],
         dishes: [],
-        today: "23.12.2020"
-    }
+        today: "23.12.2020",
+
+        }
   },
   methods: {
     clearDishes() {

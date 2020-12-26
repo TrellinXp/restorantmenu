@@ -38,4 +38,10 @@ input {
 
 .dishes-table {
     margin-top: 2rem;
+    width: 80%;
+    background-color: lightgreen;
+    text-align: left;
 }
+
+
+
