@@ -1,19 +1,32 @@
 <template>
   <div id="app">
-    <h1 v-bind:style="headline">Restorant Menu</h1>
-
-    Today the following dishes are served:
-
-    <div class="dishes">
-        Dish 1
-    </div> 
+    <h1 class="title">Restorant Menu</h1>
+    <DishesComponent />
   </div>
 </template>
 
+<style>
+  @import '../assets/styles/Dishes.css';
+</style>
+
 <script>
+
+import DishesComponent from './DishesComponent.vue'
+
 export default {
-  name: "Restorant Menu",
+  components: {
+    DishesComponent
+  },
+
+  data () {
+    return {
+      today: "23.12.2020"
+    }
+  },
+
+  name: "restorantmenu",
   mounted() {
+
   }
 }
 
