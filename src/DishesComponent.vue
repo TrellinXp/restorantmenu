@@ -2,12 +2,27 @@
 
     <div class="dishes">
 
-        The following dishes are served:
-          <AddDishComponent />
+        <EditDialogComponent ref='editDialog'/>
 
-          <div id="action">
-            <button class="button" @click="clearDishes()">Clear All Dishes</button>
-          </div>
+        <b>The following dishes are served:</b>
+        <b-table striped hover :items="dishes" :fields="fields" class="table dishes-table table-striped">
+                <template #cell(delete)="row">
+                  <b-button size="sm" @click="deleteRow(row)" class="mr-2">
+                    Delete
+                  </b-button>
+                </template>
+                <template #cell(edit)="row">
+                  <b-button size="sm" @click="editRow(row)" class="mr-2">
+                    Edit
+                  </b-button>
+                </template>
+
+        </b-table>
+
+        <div id="action">
+          <button class="addDish" v-on:click="addNewDish()">Add new Dish</button>
+          <button class="button clear" @click="clearDishes()">Clear Dishes</button>
+        </div>
     </div> 
 </template>
 
@@ -18,37 +33,76 @@
 <script>
 
 import axios from 'axios';
-import AddDishComponent from './AddDishComponent.vue'
+import EditDialogComponent from './EditDialog.vue'
 
 export default {
   components: {
-    AddDishComponent
+    EditDialogComponent
   },
   name: "restorantmenu",
   apiUrl: "http://localhost:9000/dishes/",
   data() {
     return {
-        dishes: [],
-        today: "23.12.2020"
-    }
+          fields: ["name", "description", "price", "category", "availability", "waitingTime", "delete", "edit"],
+          dishes: [],
+          today: "23.12.2020",
+          showModal: false,
+        }
   },
   methods: {
     clearDishes() {
+        this.dishes = [];
         axios.get("http://localhost:9000/dishes"+"/clear")
         .then(response => 
         
         {console.log("Dishes Cleared " + response.data)});
+    },
+
+    deleteRow(row) {
+      let self = this;
+      var payload = {
+        "_id": row.item._id
+      };
+      console.log("Row "+payload._id);
+      axios.delete("http://localhost:9000/dishes/"+payload._id, payload)
+        .then(response => 
+        
+        {self.getDishes(response)});
+    },
+
+    addNewDish() {
+        document.getElementById('modal').style.display='block';
+        this.$refs.editDialog.clearFields();
+    },
+
+    editRow(row) {
+      let self = this;
+      self.showModal = true;
+      document.getElementById('modal').style.display='block';
+
+      this.$refs.editDialog.fillData(row.item);
+    },
+
+    deleteRowRompleted(response) {
+      console.log("Response "+response);
+      self.getDishes();
+    },
+
+    getDishes() {
+      let self = this;
+      axios.get("http://localhost:9000/dishes").then((response) => {
+        self.dishes = response.data.data;
+      });
     }
   },
 
   mounted() {
-    axios.get("http://localhost:9000/dishes").then((response) => {
-      this.dishes = response.data.results;
-    });
-    console.log(this.dishes.length);
+    let self = this;
+    self.getDishes();
   },
 
-}
+};
 
 </script>
 
+ 

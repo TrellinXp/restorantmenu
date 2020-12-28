@@ -9,7 +9,12 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
+    "bootstrap-vue": "^2.21.1",
+    "bootstrap-vue-datatable": "^1.0.7",
     "core-js": "^3.8.0",
+    "moment": "^2.29.1",
+    "sass-loader": "^10.1.0",
     "vue": "^2.6.12"
   },
   "devDependencies": {
@@ -19,6 +24,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^5.0.0",
     "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {

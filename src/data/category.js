@@ -1,8 +1,8 @@
 const Category = {
-    STARTER: "starter",
-    MAINCOURSE: "main course",
-    DESSERT: "dessert",
-    BEVERAGE: "beverage"
+    STARTER: "Starter",
+    MAINCOURSE: "Main course",
+    DESSERT: "Dessert",
+    BEVERAGE: "Beverage"
 }
 
 module.exports = { Category }
