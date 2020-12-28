@@ -45,5 +45,46 @@ input {
     text-align: left;
 }
 
+.dishproperty {
+    display: flex;
+    flex-direction: row;
+}
 
+.attributename {
+    width: 10rem;
+}
 
+.modal-actions {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+}
+
+.value {
+    width: 14rem;
+    margin-bottom: 1.5rem;
+}
+
+.activated {
+    margin-bottom: 1.5rem;
+}
+
+.selectBoxDialog {
+    width: 13.6rem;
+}
+
+.modalcontainer {
+    margin-top: 2rem;
+    margin-right: 2rem;
+    padding: 2rem 2rem;
+    width: 30rem;
+}
+
+.modalcontent {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    width: 30rem !important;
+}
