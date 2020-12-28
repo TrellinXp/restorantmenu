@@ -2,7 +2,7 @@
 
     <div class="dishes">
 
-        <EditDialogComponent />
+        <EditDialogComponent ref='editDialog'/>
 
         <b>The following dishes are served:</b>
         <b-table striped hover :items="dishes" :fields="fields" class="table dishes-table table-striped">
@@ -34,7 +34,6 @@
 
 import axios from 'axios';
 import EditDialogComponent from './EditDialog.vue'
-import eventBus from './main'
 
 export default {
   components: {
@@ -73,14 +72,15 @@ export default {
 
     addNewDish() {
         document.getElementById('modal').style.display='block';
+        this.$refs.editDialog.clearFields();
     },
 
     editRow(row) {
       let self = this;
       self.showModal = true;
       document.getElementById('modal').style.display='block';
-      eventBus.$emit('fillDataEvent', row.item);
-      console.log("Event emited on" + eventBus);
+
+      this.$refs.editDialog.fillData(row.item);
     },
 
     deleteRowRompleted(response) {
@@ -99,7 +99,6 @@ export default {
   mounted() {
     let self = this;
     self.getDishes();
-    console.log("Event Bus Dishes Component " + eventBus);
   },
 
 };

@@ -101,17 +101,15 @@ export default {
        self.clearFields();
   },
 
-  created() {
-       let self = this;
-       console.log("Event Bus Edit Dialog" + eventBus);
-       eventBus.$on('fillDataEvent', function (payLoad) {
-            self.fillData(payLoad)}
-       );
-  },
-
   methods: {
     fillData(data) {
-        console.log("Fill data"+data);
+        console.log("Fill data " + data);
+        let self = this;
+        self.dishname = data.name;
+        self.description = data.description;
+        self.price = data.price;
+        self.activated = data.active;
+        self.servingTime = data.waitingTime;
     },
 
     clearFields() {
@@ -128,9 +126,10 @@ export default {
         var dish = new Dish(this.dishname, this.description, this.price, this.category, this.availability, this.activated, this.servingTime);
         axios.put("http://localhost:9000/dishes", dish).then((response) => {
             console.log("Added Dish "+response.data.data);
+            document.getElementById('modal').style.display='none';
         });
 
-        eventBus.$emit('refreshData');
+        /** Call Get Dishes From Dishes Component */
     },
 
     cancel() {
