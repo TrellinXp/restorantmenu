@@ -127,9 +127,11 @@ export default {
         axios.put("http://localhost:9000/dishes", dish).then((response) => {
             console.log("Added Dish "+response.data.data);
             document.getElementById('modal').style.display='none';
+            
+            /** Call Get Dishes From Dishes Component */
+            this.$parent.getDishes();
         });
 
-        /** Call Get Dishes From Dishes Component */
     },
 
     cancel() {
