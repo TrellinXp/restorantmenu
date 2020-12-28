@@ -18,10 +18,10 @@
                 </template>
 
         </b-table>
-        <AddDishComponent />
 
         <div id="action">
-          <button class="button" @click="clearDishes()">Save</button>
+          <button class="addDish" v-on:click="addNewDish()">Add new Dish</button>
+          <button class="button clear" @click="clearDishes()">Clear Dishes</button>
         </div>
     </div> 
 </template>
@@ -33,12 +33,11 @@
 <script>
 
 import axios from 'axios';
-import AddDishComponent from './AddDishComponent.vue'
 import EditDialogComponent from './EditDialog.vue'
+import eventBus from './main'
 
 export default {
   components: {
-    AddDishComponent,
     EditDialogComponent
   },
   name: "restorantmenu",
@@ -49,7 +48,6 @@ export default {
           dishes: [],
           today: "23.12.2020",
           showModal: false,
-          editDish: "",
         }
   },
   methods: {
@@ -73,13 +71,16 @@ export default {
         {self.getDishes(response)});
     },
 
+    addNewDish() {
+        document.getElementById('modal').style.display='block';
+    },
+
     editRow(row) {
       let self = this;
       self.showModal = true;
-      self.editDish = row.item;
       document.getElementById('modal').style.display='block';
-      /*let edit = new EditDialogVue();
-      edit.open(row);*/
+      eventBus.$emit('fillDataEvent', row.item);
+      console.log("Event emited on" + eventBus);
     },
 
     deleteRowRompleted(response) {
@@ -98,6 +99,7 @@ export default {
   mounted() {
     let self = this;
     self.getDishes();
+    console.log("Event Bus Dishes Component " + eventBus);
   },
 
 };

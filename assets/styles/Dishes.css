@@ -88,3 +88,7 @@ input {
     outline: 0;
     width: 30rem !important;
 }
+
+.clear {
+    margin-left:2rem;
+}

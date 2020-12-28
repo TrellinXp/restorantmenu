@@ -1,7 +1,7 @@
 <template>
   <div>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <div :data-show="showModal" id="modal" class="w3-modal modalClass">
+    <div id="modal" class="w3-modal modalClass">
       <div class="modalcontent">
         <div class="modalcontainer">
           <span
@@ -73,6 +73,8 @@
 import axios from "axios";
 import { Category } from "./data/category.js";
 import { Availability } from "./data/availability.js";
+import Dish from './data/Dish.js'
+import eventBus from './main'
 
 export default {
   name: "restorantmenu",
@@ -94,11 +96,42 @@ export default {
   },
 
   mounted() {
-    axios.get("http://localhost:9000/dishes");
+       let self = this;
+       console.log("Event Bus Edit Dialog" + eventBus);
+       self.clearFields();
+  },
+
+  created() {
+       let self = this;
+       console.log("Event Bus Edit Dialog" + eventBus);
+       eventBus.$on('fillDataEvent', function (payLoad) {
+            self.fillData(payLoad)}
+       );
   },
 
   methods: {
-    open() {},
+    fillData(data) {
+        console.log("Fill data"+data);
+    },
+
+    clearFields() {
+      let self = this;
+      self.dishname = "";
+      self.description = "";
+      self.price = "";
+      self.activated = true;
+      self.servingTime = "";
+    },
+
+    saveEdit() {
+        console.log("Save Edit");
+        var dish = new Dish(this.dishname, this.description, this.price, this.category, this.availability, this.activated, this.servingTime);
+        axios.put("http://localhost:9000/dishes", dish).then((response) => {
+            console.log("Added Dish "+response.data.data);
+        });
+
+        eventBus.$emit('refreshData');
+    },
 
     cancel() {
         document.getElementById('modal').style.display='none';
